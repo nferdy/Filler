@@ -1,0 +1,180 @@
+/* =========================================
+   RESET & VARIABEL DASAR
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: crosshair; /* Kursor khas ala developer/hacker */
+}
+
+:root {
+    --bg-color: #050505; /* Hitam pekat */
+    --text-color: #f4f4f4; /* Putih sedikit abu untuk mengurangi ketegangan mata */
+    --accent-color: #555555;
+    --font-primary: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-primary);
+    overflow: hidden; /* Mencegah scroll standar ala web interaktif */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   EFEK NOISE (BINTIK-BINTIK TV RUSAK/FILM)
+========================================= */
+.noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Agar tidak mengganggu klik */
+    z-index: 9999;
+    opacity: 0.04; /* Transparansi rendah agar halus */
+    background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+}
+
+/* =========================================
+   NAVIGASI (TOP BAR)
+========================================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    mix-blend-mode: difference; /* Trik agar teks selalu terlihat jika bg berubah */
+}
+
+.logo {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.menu-toggle {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Garis bawah animasi saat hover menu */
+.menu-toggle::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-color);
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-toggle:hover::after {
+    transform: translateX(0);
+}
+
+/* =========================================
+   HERO SECTION (KONTEN TENGAH)
+========================================= */
+.hero {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    position: relative;
+    z-index: 10;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    animation: fadeIn 2s ease forwards;
+}
+
+.title {
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    margin: 0;
+    /* Efek teks mulus */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    animation: slideUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Tombol khas agency web dengan animasi border */
+.explore-btn {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    animation: fadeIn 3s ease forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.explore-btn:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
+}
+
+/* =========================================
+   ANIMASI (KEYFRAMES)
+========================================= */
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
